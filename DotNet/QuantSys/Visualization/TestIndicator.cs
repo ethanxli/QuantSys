@@ -2,21 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using IronPython.Runtime;
-using QuantSys.Indicators.Abstraction;
-using QuantSys.MarketData;
-using QuantSys.TradeEngine;
-using QuantSys.TradeEngine.Functions;
-using QuantSys.Util;
-using QuantSys.Visualization;
-using QuantSys.Visualization.Highstocks;
 using ikvm.extensions;
 using MathNet.Numerics.LinearAlgebra.Double;
+using QuantSys.Analytics.Timeseries.Indicators.Abstraction;
+using QuantSys.MarketData;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface.Functions;
+using QuantSys.Util;
+using QuantSys.Visualization.Highstocks;
 
-namespace QuantSys.Analytics
+namespace QuantSys.Visualization
 {
     internal static class TestIndicator
     {
+
+        public static void TestMultiSymbolGraph(this AbstractMultiSymbolIndicator ind, string[] filename, int length)
+        {
+            
+
+            List<Quantum> lq = new List<Quantum>();
+
+            foreach (string s in filename)
+            {
+                lq.Add(Quantum.ExcelToQuantum(s, s, 0));
+            }
+            MultiQuantum multiQuantum = MultiQuantum.OrganizeMultiQuantum(lq);
+
+
+            var dz = new DenseMatrix(4 + 1 + ind.SubIndicatorSize, multiQuantum.Length);
+            List<string> names = new List<string>();
+            names.Add("symbol");
+            names.Add(ind.ToString());
+            foreach (var indicator in ind.SubIndicators) names.Add(indicator.Key);
+
+            //chartoptions
+            ChartOption[] chartOptions = new ChartOption[names.Count];
+            chartOptions[0] = new ChartOption() { Height = 400, YPosition = 0 };
+            chartOptions[1] = new ChartOption() { Height = 200, YPosition = 1 };
+            for (int i = 2; i < chartOptions.Length; i++)
+                chartOptions[i] = new ChartOption() { Height = 0, YPosition = 1, Layover = true };
+
+            int counter = 0;
+            foreach (List<Tick> t in multiQuantum)
+            {
+                dz[0, counter] = t[0].BidOpen;
+                dz[1, counter] = t[0].BidHigh;
+                dz[2, counter] = t[0].BidLow;
+                dz[3, counter] = t[0].BidClose;
+
+                dz[4, counter] = ind.HandleNextTicks(t.ToArray());
+
+                int icounter = 5;
+                foreach (var subind in ind.SubIndicators.Values)
+                {
+                    dz[icounter, counter] = subind[0];
+                    icounter++;
+                }
+
+                counter++;
+            }
+
+
+            Visualize.GenerateMultiPaneGraph(names.ToArray(), multiQuantum.Keys.ToArray(), dz, QSConstants.DEFAULT_DATA_FILEPATH + @"results.html",
+                chartOptions);
+
+            Console.WriteLine("Done Generating Graph for " + ind.ToString());
+        }
+
+
         public static void TestGraph(this AbstractIndicator ind, string filename, int length)
         {
             Quantum q = Quantum.ExcelToQuantum(filename, "symbol", 0);
@@ -69,7 +122,7 @@ namespace QuantSys.Analytics
             FXSession session = new FXSession();
             session.InitializeSession();
 
-            HistoricPriceGrabber h = new HistoricPriceGrabber(session);
+            HistoricPriceEngine h = new HistoricPriceEngine(session);
             h.GetLongHistoricPrices(symbol, timeframe, length);
 
             while (!h.Complete)
@@ -220,7 +273,7 @@ namespace QuantSys.Analytics
                 Thread.Sleep(100);
             }
 
-            HistoricPriceGrabber h = new HistoricPriceGrabber(session);
+            HistoricPriceEngine h = new HistoricPriceEngine(session);
             h.GetLongHistoricPrices(symbol, timeframe, length);
 
             while (!h.Complete)

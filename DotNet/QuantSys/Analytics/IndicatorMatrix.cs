@@ -5,11 +5,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using QuantSys.Indicators.Abstraction;
-using QuantSys.Indicators.Oscillators;
+using QuantSys.Analytics.Timeseries.Indicators.Abstraction;
+using QuantSys.Analytics.Timeseries.Indicators.Oscillators;
 using QuantSys.MarketData;
 using QuantSys.TradeEngine;
-using QuantSys.TradeEngine.Functions;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface.Functions;
 
 namespace QuantSys.Analytics
 {
@@ -52,7 +53,7 @@ namespace QuantSys.Analytics
             
             foreach (string s in sList)
             {
-                HistoricPriceGrabber h = new HistoricPriceGrabber(session);
+                HistoricPriceEngine h = new HistoricPriceEngine(session);
                 h.GetLongHistoricPrices(symbol, s, ticks);
                 while(!h.Complete) Thread.Sleep(100);   
                 mData.Add(h.Data);

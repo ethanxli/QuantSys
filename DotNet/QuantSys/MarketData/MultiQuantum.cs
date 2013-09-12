@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuantSys.MarketData
 {
@@ -67,6 +68,23 @@ namespace QuantSys.MarketData
 
         }
 
+        public List<List<Tick>> RevertToList()
+        {
+            int count = this.First().Count;
+            List<List<Tick>> list = new List<List<Tick>>();
+
+            for (int i = 0; i < count; i++)
+                list.Add(new List<Tick>());
+
+            foreach(List<Tick> ticks in this)
+            {
+                for (int i = 0; i < count; i++)
+                    list[i].Add(ticks[i]);
+            }
+
+            return list;
+
+        } 
         public IEnumerator<List<Tick>> GetEnumerator()
         {
             return _totalData.Values.GetEnumerator();

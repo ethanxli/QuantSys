@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3050942B-CCFD-4F82-8C23-96B649B6239D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuantSys</RootNamespace>
+    <AssemblyName>QuantSys</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="encog-core-cs, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3e882172b12155d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\encog-core-cs.dll</HintPath>
+    </Reference>
+    <Reference Include="fxcore2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=440355e023152e83, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\fxcore2.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core">
+      <HintPath>..\packages\libsvm.net.2.0.1\Lib\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="libsvm">
+      <HintPath>..\packages\libsvm.net.2.0.1\Lib\libsvm.dll</HintPath>
+    </Reference>
+    <Reference Include="LIBSVM.NET">
+      <HintPath>..\packages\libsvm.net.2.0.1\Lib\LIBSVM.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Iridium, Version=2008.8.16.470, Culture=neutral, PublicKeyToken=c061a3ec32cc0c6f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MathNet.Iridium.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\..\..\data\Net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="WaveletStudio, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WaveletStudio.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analytics\StatisticalModeling\ARMA.cs" />
+    <Compile Include="Analytics\Pricing\BinomialTreeOptionPricing.cs" />
+    <Compile Include="Analytics\StatisticalModeling\Cointegration\DickeyFuller.cs" />
+    <Compile Include="Analytics\DenseVectorExtension.cs" />
+    <Compile Include="Analytics\Pricing\EPutCall.cs" />
+    <Compile Include="Analytics\StatisticalModeling\GARCH.cs" />
+    <Compile Include="Analytics\StatisticalModeling\HurstEstimation.cs" />
+    <Compile Include="Analytics\StatisticalModeling\PCA\KPCA.cs" />
+    <Compile Include="Analytics\StatisticalModeling\PCA\PCA.cs" />
+    <Compile Include="Analytics\StatisticalModeling\PCA\PrincipalComponent.cs" />
+    <Compile Include="Analytics\StatisticalModeling\VarianceRatio.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Abstraction\AbstractAverage.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Abstraction\AbstractMultiSymbolIndicator.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Channels\QSVWChannel.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\Covariance.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\Divergence.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\HurstIndicator.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\ReversalGenesis.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\SRLevels\DenmarkLevels.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\SRLevels\FibonacciLevels.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Abstraction\AbstractPivotPoints.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\SRLevels\PivotLevels.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Genes\BinaryGene.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Genes\Constraints\GeneConstraint.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Genes\RealCodedGene.cs" />
+    <Compile Include="MachineLearning\NeuralNetwork\PSO.cs" />
+    <Compile Include="MarketData\Symbol.cs" />
+    <Compile Include="TradeEngine\AccountManagement\AccountManager.cs" />
+    <Compile Include="TradeEngine\AccountManagement\BacktestEngine.cs" />
+    <Compile Include="TradeEngine\AccountManagement\IAccountManager.cs" />
+    <Compile Include="TradeEngine\AccountManagement\LiveAccountManager.cs" />
+    <Compile Include="TradeEngine\AccountManagement\LiveTradeEngine.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\EventArguments\AccountInformationEventArg.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\EventArguments\MarketDataEventArg.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\AccountInformation.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\HistoricPriceEngine.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\IJob.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_Cointegration.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_CorrelationMatrix.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_IndicatorSet.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_OptimalPortfolio.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_SingleStatistic.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\Jobs\Job_SymbolSet.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Functions\OrderPlacementEngine.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\FXSession.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Listener\ResponseListener.cs" />
+    <Compile Include="TradeEngine\MarketInterface\FXCMInterface\Listener\SessionStatusListener.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Order\IOrder.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Order\LimitOrder.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Order\MarketOrder.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Order\StopOrder.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Portfolio.cs" />
+    <Compile Include="TradeEngine\Simulation\Account\Position.cs" />
+    <Compile Include="TradeEngine\Simulation\Performance\BacktestPerformance.cs" />
+    <Compile Include="TradeEngine\Simulation\Performance\TradeRecord.cs" />
+    <Compile Include="TradeEngine\Strategy\Covariance.cs" />
+    <Compile Include="Util\GSLClass.cs" />
+    <Compile Include="Analytics\IndicatorMatrix.cs" />
+    <Compile Include="Analytics\StatisticalModeling\Cointegration\JohansenHelper.cs" />
+    <Compile Include="Analytics\StatisticalModeling\LinearRegression.cs" />
+    <Compile Include="Analytics\StatisticalModeling\Cointegration\MaxEigenData.cs" />
+    <Compile Include="Analytics\StatisticalModeling\PolynomialRegression.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\QSPolyMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\ZLEMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\CrossoverIndex.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\ForceIndex.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\GenericContainer.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\Aroon.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\DI.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\PFE.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\RWI.cs" />
+    <Compile Include="MarketData\Timeframe.cs" />
+    <Compile Include="TradeEngine\Strategy\ChannelStrategy.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Abstraction\AbstractChannel.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\KAMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Channels\BollingerBands.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Channels\KirshenbaumBands.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\WMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\ParabolicSAR.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Channels\QSPolyChannel.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\RVI.cs" />
+    <Compile Include="Util\IronPython\ScriptMachine.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Crossover.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Selection.cs" />
+    <Compile Include="MarketData\MultiQuantum.cs" />
+    <Compile Include="TradeEngine\Strategy\AbstractStrategy.cs" />
+    <Compile Include="TradeEngine\Strategy\ACStrat.cs" />
+    <Compile Include="TradeEngine\Strategy\Cointegration.cs" />
+    <Compile Include="TradeEngine\Strategy\GenesisStrategy.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Abstraction\AbstractIndicator.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\AC.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\AO.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\CCI.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Channels\GannHiLo.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\Genesis.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\HeikenAshi.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\HistoricalVol.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\KST.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\GDEMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Transforms\DWT.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Transforms\PercentileRank.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\ROC.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\RSquared.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\QEMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\AdaptiveSmoothing.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\TEMA.cs" />
+    <Compile Include="TradeEngine\Strategy\NeuralNetworkStrategy.cs" />
+    <Compile Include="TradeEngine\Strategy\Pyramid.cs" />
+    <Compile Include="TradeEngine\Strategy\RegimeSwitch.cs" />
+    <Compile Include="TradeEngine\Strategy\RSIStrat.cs" />
+    <Compile Include="Util\QSConstants.cs" />
+    <Compile Include="Util\DoubleConverter.cs" />
+    <Compile Include="Visualization\Highstocks\ChartOption.cs" />
+    <Compile Include="Visualization\Highstocks\HighstockFlag.cs" />
+    <Compile Include="DataStructures\MovingQueue.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\SMA.cs" />
+    <Compile Include="Visualization\TestIndicator.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\TRIX.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\UltimateOscillator.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\WilliamsR.cs" />
+    <Compile Include="Visualization\TableGeneration.cs" />
+    <Compile Include="Visualization\Visualize.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\CMO.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\MFM.cs" />
+    <Compile Include="MachineLearning\NeuralNetwork\TwoStageNN.cs" />
+    <Compile Include="MachineLearning\NeuralNetwork\Stage2NeuralNetwork.cs" />
+    <Compile Include="MachineLearning\NeuralNetwork\Stage1NeuralNetwork.cs" />
+    <Compile Include="MachineLearning\NeuralNetwork\SOFNN.cs" />
+    <Compile Include="Analytics\StatisticalModeling\StatisticsExtension.cs" />
+    <Compile Include="Analytics\SignalProcessing\SignalTransform.cs" />
+    <Compile Include="MarketData\Tick.cs" />
+    <Compile Include="MarketData\Quantum.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\ADX.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\ATR.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\Chaikin.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Averages\EMA.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\MACD.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Misc\MFI.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\RSI.cs" />
+    <Compile Include="Analytics\Timeseries\Indicators\Oscillators\STOCH.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Chromosome.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\GeneticAlgorithm.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Genes\Gene.cs" />
+    <Compile Include="MachineLearning\GeneticAlgorithm\Population.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MachineLearning\SupportVectorMachine\Predict.cs" />
+    <Compile Include="Util\DateTimeUtils.cs" />
+    <Compile Include="Visualization\Highcharts\Attributes\JsonFormatterAttribute.cs" />
+    <Compile Include="Visualization\Highcharts\Attributes\NameAttribute.cs" />
+    <Compile Include="Visualization\Highcharts\Container.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\AxisTitleAligns.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\AxisTypes.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\ChartTypes.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\Cursors.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\DashStyles.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\EasingTypes.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\HorizontalAligns.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\Layouts.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\Placement.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\RelativeTo.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\Stackings.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\Symbols.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\TickPositions.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\VerticalAligns.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\WeekDays.cs" />
+    <Compile Include="Visualization\Highcharts\Enums\ZoomTypes.cs" />
+    <Compile Include="Visualization\Highcharts\Extensions.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Animation.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\BackColorOrGradient.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\BackgroundObject.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Crosshairs.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Data.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\DateTimeLabel.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Drilldown.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Events.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\GlobalOptions.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\JsonFormatter.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Lang.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\MenuItem.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Number.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\PercentageOrPixel.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\PointStart.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Position.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Theme.cs" />
+    <Compile Include="Visualization\Highcharts\Helpers\Tools.cs" />
+    <Compile Include="Visualization\Highcharts\Highcharts.cs" />
+    <Compile Include="Visualization\Highcharts\JsonSerializer.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Chart.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ChartEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ChartResetZoomButton.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Colors.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Credits.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Exporting.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ExportingButtons.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ExportingButtonsContextButton.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ExportingButtonsExportButton.cs" />
+    <Compile Include="Visualization\Highcharts\Options\ExportingButtonsPrintButton.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Global.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Labels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\LabelsItems.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Lang.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Legend.cs" />
+    <Compile Include="Visualization\Highcharts\Options\LegendNavigation.cs" />
+    <Compile Include="Visualization\Highcharts\Options\LegendTitle.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Loading.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Navigation.cs" />
+    <Compile Include="Visualization\Highcharts\Options\NavigationButtonOptions.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Pane.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptions.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArea.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearange.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsArearangeTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaspline.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerange.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplinerangeTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreasplineTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsAreaTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBar.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBarTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplot.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBoxplotTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubble.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubblePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubblePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsBubbleTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumn.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrange.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnrangeTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsColumnTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbar.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsErrorbarTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnel.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsFunnelTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGauge.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeDial.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugePivot.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsGaugeTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLine.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLinePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLinePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsLineTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPie.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPiePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPiePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsPieTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatter.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsScatterTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeries.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSeriesTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSpline.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplinePoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplinePointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsSplineTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfall.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallDataLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallPoint.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallPointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallStatesHoverMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PlotOptionsWaterfallTooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Point.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PointEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\PointMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Series.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesData.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesDataEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesDataMarker.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesDataMarkerStates.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesDataMarkerStatesHover.cs" />
+    <Compile Include="Visualization\Highcharts\Options\SeriesDataMarkerStatesSelect.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Subtitle.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Symbols.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Title.cs" />
+    <Compile Include="Visualization\Highcharts\Options\Tooltip.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxis.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisPlotBands.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisPlotBandsLabel.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisPlotLines.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisPlotLinesLabel.cs" />
+    <Compile Include="Visualization\Highcharts\Options\XAxisTitle.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxis.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisEvents.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisPlotBands.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisPlotBandsLabel.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisPlotLines.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisPlotLinesLabel.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisStackLabels.cs" />
+    <Compile Include="Visualization\Highcharts\Options\YAxisTitle.cs" />
+    <Compile Include="Util\Emailer.cs" />
+    <Compile Include="Util\ExcelUtil.cs" />
+    <Compile Include="Util\FileUpload.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MachineLearning\SentimentEngine\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

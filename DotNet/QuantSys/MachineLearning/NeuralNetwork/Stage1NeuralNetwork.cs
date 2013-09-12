@@ -36,6 +36,7 @@ using Encog.Neural.RBF;
 using Encog.Util.Arrayutil;
 using MathNet.Numerics.LinearAlgebra.Double;
 using QuantSys.Analytics;
+using QuantSys.Analytics.StatisticalModeling;
 using QuantSys.Util;
 using QuantSys.Visualization;
 

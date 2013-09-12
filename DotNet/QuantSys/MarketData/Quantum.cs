@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
-using QuantSys.PortfolioEngine;
 using QuantSys.TradeEngine;
-using QuantSys.TradeEngine.Functions;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface;
+using QuantSys.TradeEngine.MarketInterface.FXCMInterface.Functions;
 using QuantSys.Util;
 
 namespace QuantSys.MarketData
@@ -13,7 +14,6 @@ namespace QuantSys.MarketData
     public class Quantum : IEnumerable<Tick>
     {
         private readonly SortedList<DateTime, Tick> _data;
-
         public Quantum(SortedList<DateTime, Tick> data)
         {
             _data = data;
@@ -24,6 +24,10 @@ namespace QuantSys.MarketData
             _data = new SortedList<DateTime, Tick>();
         }
 
+        public Tick[] ToArray()
+        {
+            return _data.Values.ToArray();
+        }
         public SortedList<DateTime, Tick> Data
         {
             get { return _data; }
@@ -65,7 +69,7 @@ namespace QuantSys.MarketData
         /// <param name="symbol"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public static Quantum ExcelToQuantum(string filename, string symbol, int startIndex)
+        public static Quantum ExcelToQuantum(string filename, string symbol, int startIndex = 0)
         {
             object[,] denseMatrix;
             ExcelUtil.Open(@filename, out denseMatrix);
@@ -105,13 +109,11 @@ namespace QuantSys.MarketData
             return (new Quantum(mData) { Symbol = s });
         }
 
-
-
         public static Quantum QuantumFromLiveData(string symbol, string timeframe, int ticks)
         {
             FXSession session = new FXSession();
             session.InitializeSession();
-            HistoricPriceGrabber h = new HistoricPriceGrabber(session);
+            HistoricPriceEngine h = new HistoricPriceEngine(session);
             h.GetLongHistoricPrices(symbol, timeframe, ticks);
             while(!h.Complete) Thread.Sleep(100);
 

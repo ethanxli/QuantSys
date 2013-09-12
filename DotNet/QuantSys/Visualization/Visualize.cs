@@ -162,7 +162,7 @@ namespace QuantSys.Visualization
                 })
                 .SetPlotOptions(new PlotOptions
                 {
-                    Series = new PlotOptionsSeries {Marker = new PlotOptionsSeriesMarker {Enabled = false}}
+                    Series = new PlotOptionsSeries {Marker = new PlotOptionsSeriesMarker {Enabled = false}, TurboThreshold = 0}
                 })
                 .InitChart(new Chart {ZoomType = ZoomTypes.X, Type = ChartTypes.Spline})
                 ;
@@ -170,6 +170,22 @@ namespace QuantSys.Visualization
             chart.WriteHighChartToFile(filename);
         }
 
+        public static void GenerateSimpleComparisonGraph(string[] dataNames, DenseMatrix data, string filename)
+        {
+            Highcharts.Highcharts chart = new Highcharts.Highcharts("chart3535");
+            chart.WriteHighChartToFile(filename);
+        }
+
+        public static void GenerateScatterPlot(string xAxis, string yAxis, DenseMatrix data, string filename)
+        {
+            
+        }
+
+        public static void GenerateStrategyComparisonGraph(string[] strategies, DateTime[] dateTimes, DenseMatrix data,
+                                                      string filename, string title)
+        {
+            
+        }
 
         public static void GenerateMultiPaneGraph(string[] symbols, DateTime[] dateTimes, DenseMatrix data, string filename, ChartOption[] options = null, HighstockFlag[] flags = null, string JSONFILENAME = "temp.json")
         {

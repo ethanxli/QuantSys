@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Microsoft.Scripting.Runtime;
+using QuantSys.MachineLearning.GeneticAlgorithm.Genes;
 using QuantSys.Util;
 
 namespace QuantSys.MachineLearning.GeneticAlgorithm
 {
     public class GeneticAlgorithm
     {
+        private const string OUTPUT_FILEPATH = QSConstants.DEFAULT_DATA_FILEPATH;
+
         private const int DefaultPopulationSize = 30;
         private const int DefaultNumGenerations = 50;
         private const int DefaultNumTrials = 10;
@@ -27,6 +32,7 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
             double mutRate = DefaultMutationRate
             )
         {
+
             _fitnessFunction = fitness;
             _randomSeed = new Random();
             this.ChromosomeFootprint = ChromosomeFootprint;
@@ -42,7 +48,7 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
         public int Trials { get; set; }
         public double MutationRate { get; set; }
 
-        public void InitializePopulation()
+        private void InitializePopulation()
         {
             var c = new List<Chromosome>();
 
@@ -51,9 +57,9 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
                 var gList = new List<Gene>();
                 foreach (Gene g in ChromosomeFootprint)
                 {
-                    var newG = new Gene(g.GeneValue, g.GeneConstraint);
-                    newG.InitializeGene(_randomSeed);
-                    gList.Add(newG);
+                    Gene gene = g.Clone();
+                    gene.InitializeGene();
+                    gList.Add(gene);
                 }
 
                 var cx = new Chromosome(gList);
@@ -66,12 +72,14 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
 
         public void Run()
         {
+            InitializePopulation();
+
             double maxFitness = 0;
 
             while (_currentTrial++ < Trials)
             {
                 
-
+                Console.WriteLine("Starting trial " + _currentTrial + "...");
 
                 string filename = QSConstants.DEFAULT_DATA_FILEPATH + "result" + _currentTrial + ".txt";
 
@@ -115,7 +123,7 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
 
                                 file.WriteLine("Generation: {0}", generation);
                                 file.WriteLine("Fitness: {0}", maxFitness);
-                                for (int i = 0; i < maxC.GeneList.Count; i++)
+                                for (int i = 0; i < maxC.Count(); i++)
                                 {
                                     file.WriteLine("Gene " + i + ":" + maxC[i]);
                                 }
@@ -137,6 +145,8 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
 
                 maxC.CalculateFitness(_fitnessFunction);
             }
+
+            Console.WriteLine("Execution complete.");
         }
     }
 }

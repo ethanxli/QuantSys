@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using MathNet.Numerics.LinearAlgebra.Double;
 using QuantSys.Analytics;
+using QuantSys.Analytics.StatisticalModeling;
 
 namespace QuantSys.MachineLearning.NeuralNetwork
 {

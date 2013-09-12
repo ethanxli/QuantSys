@@ -2,7 +2,7 @@
 using WaveletStudio;
 using WaveletStudio.Blocks;
 
-namespace QuantSys.Analytics.WaveTransformer
+namespace QuantSys.Analytics.SignalProcessing
 {
     public class SignalTransform
     {

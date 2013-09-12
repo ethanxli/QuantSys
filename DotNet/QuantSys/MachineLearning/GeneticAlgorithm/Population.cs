@@ -38,7 +38,7 @@ namespace QuantSys.MachineLearning.GeneticAlgorithm
         {
             foreach (Chromosome c in pop)
             {
-                c.Mutate(mRate, r);
+                c.Mutate(mRate);
             }
         }
 

@@ -10,19 +10,16 @@ namespace QuantSys.Util
     {
         public static void Open(string filename, out object[,] data)
         {
-            Application xlApp;
-            Workbook xlWorkBook;
-            Worksheet xlWorkSheet;
             object misValue = Missing.Value;
 
 
             Console.WriteLine("Loading File " + filename + " ...");
-            xlApp = new Application();
-            xlWorkBook = xlApp.Workbooks.Open(filename, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false,
+            var xlApp = new Application();
+            var xlWorkBook = xlApp.Workbooks.Open(filename, 0, true, 5, "", "", true, XlPlatform.xlWindows, "\t", false,
                 false, 0, true, 1, 0);
             Console.WriteLine("Done.");
 
-            xlWorkSheet = (Worksheet) xlWorkBook.Worksheets.get_Item(1);
+            var xlWorkSheet = (Worksheet) xlWorkBook.Worksheets.Item[1];
 
             data = ParseData(xlWorkSheet);
 
