@@ -3,6 +3,7 @@ QuantSys
 A C# platform for designing, simulating, and trading algorithms.
 
 V0.1 - First commit. Included Packages:
+
 	- Analytics: statistical modelling, signal processing, technical indicator calculation
 	- MachineLearning: genetic algorithm, experimentation with neural networks
 	- MarketData: Generic classes for manipulation of time series data
